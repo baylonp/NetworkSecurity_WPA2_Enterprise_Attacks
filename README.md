@@ -91,3 +91,9 @@ to store the passwords.
 
 
 
+The second to last step is to generate the RADIUS server certificate, since the server authenticate itself to the client using them. We generate the public and private certs using the default conf. The process involves compiling with the **make** command inside the **/etc/freeradius/3.0/certs** folder.
+
+To conclude, we set PEAP-MSCHAPv2 as the RADIUS server authentication scheme at **/etc/freeradius/3.0/mods-enabled/eap** inside the peap section.
+
+
+
