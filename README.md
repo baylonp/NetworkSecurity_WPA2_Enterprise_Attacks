@@ -77,6 +77,17 @@ can be seen in figure 3.2 <--MOSTRARE ARCHITETTURA
 The Freeradius server was setup in a way that the clients connecting to the router
 needed credentials and the server provided a certificate instead. This is the basis
 for the **PEAP-MSCHAPv2 authentication scheme**.
-After having installed the freeradius server with: '$ sudo apt-get install freeradius' we needed to enable the specific freeradius module for PEAP-MSCHAPv2 authentication mechanism.
+
+After having installed the freeradius server with: '**$ sudo apt-get install freeradius**' we needed to enable the specific freeradius module for PEAP-MSCHAPv2 authentication mechanism.
+
 The configuration file is at: **/etc/freeradius/3.0/sites-enabled/default** and we make sure the module has the lines  **AUth-Type MS-CHAP { mschap}**  uncommented. We do this both for the Authenticate{} and the Authorize{} section.
+
+
+
+At this point some users are needed to be in the **/etc/freeradius/3.0/users**. We added a user named **Bob** with its password being **hello** with the string **"bob" Cleartext-Password := "hello"**.
+
+Notice that we didn’t apply any hashing techniques to the password so that the cracking process would be easier. In reality, hash+salt should be the preferred way
+to store the passwords.
+
+
 
