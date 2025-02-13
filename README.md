@@ -11,8 +11,10 @@ We took as reference the paper [METTER PAPER] which performed several different 
 
 - [Introduction]()
 - [Paper Results]()
-- [What Is A Deep Learning Model And Where To Start Building One]()
-- [Validation Split = 0.2]()
+- [Overview of the Architecture]()
+- [Let's setup]()
+- []()
+- 
 
 
 
@@ -48,9 +50,32 @@ to disconnect from the network. However, the tests revealed that, while PMF enha
 different devices, and in some cases, it is not sufficient to fully prevent client disconnections.
 
 
-Another interesting aspect revealed by the analysis was the variation in security implementations across different hardware and software vendors. The
+**Another interesting aspect** revealed by the analysis was the variation in security implementations across different hardware and software vendors. The
 tests showed that while some Windows and Linux devices formally support PMF
-and WPA3, they exhibit significant differences in how they handle attacks. For
+and WPA3, **they exhibit significant differences in how they handle attacks**. For
 example, some devices ignored unprotected deauthentication frames, while others
 processed them, resulting in a connection loss—even when the protocol should theoretically prevent this. This demonstrates that the protection offered by PMF does
 not solely depend on the protocol itself but also on how manufacturers implement the specifications in their devices.
+
+
+
+## Overview of The Architecture 
+
+The list of what was needed in our environment to make it work comprises:
+
+• Router supporting WPA2 Enterprise
+• RADIUS server (**Freeradius**) on an Ubuntu Server
+• Clients for testing- PCs and Phones
+
+We run Freeradius on a VM in a Proxmox server. The server had an assigned NIC that connected it directly to the router. We also
+tried deploying an AD Domain Controller on a Windows Server for storing users credentials, the connection between Freeradius and the DC worked flawlessly but the
+user authentication could not work and we decided to drop this approach relying only on the Freeradius server and users specified in its configuration file. The architecture
+can be seen in figure 3.2 <--MOSTRARE ARCHITETTURA
+
+## Let's setup
+The Freeradius server was setup in a way that the clients connecting to the router
+needed credentials and the server provided a certificate instead. This is the basis
+for the **PEAP-MSCHAPv2 authentication scheme**.
+After having installed the freeradius server with: '$ sudo apt-get install freeradius' we needed to enable the specific freeradius module for PEAP-MSCHAPv2 authentication mechanism.
+The configuration file is at: **/etc/freeradius/3.0/sites-enabled/default** and we make sure the module has the lines  **AUth-Type MS-CHAP { mschap}**  uncommented. We do this both for the Authenticate{} and the Authorize{} section.
+
