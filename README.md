@@ -63,9 +63,9 @@ not solely depend on the protocol itself but also on how manufacturers implement
 
 The list of what was needed in our environment to make it work comprises:
 
-• Router supporting WPA2 Enterprise
-• RADIUS server (**Freeradius**) on an Ubuntu Server
-• Clients for testing- PCs and Phones
+- Router supporting WPA2 Enterprise
+- RADIUS server (**Freeradius**) on an Ubuntu Server
+- Clients for testing- PCs and Phones
 
 We run Freeradius on a VM in a Proxmox server. The server had an assigned NIC that connected it directly to the router. We also
 tried deploying an AD Domain Controller on a Windows Server for storing users credentials, the connection between Freeradius and the DC worked flawlessly but the
@@ -73,6 +73,7 @@ user authentication could not work and we decided to drop this approach relying 
 can be seen in figure 3.2 <--MOSTRARE ARCHITETTURA
 
 ## Let's setup
+
 The Freeradius server was setup in a way that the clients connecting to the router
 needed credentials and the server provided a certificate instead. This is the basis
 for the **PEAP-MSCHAPv2 authentication scheme**.
