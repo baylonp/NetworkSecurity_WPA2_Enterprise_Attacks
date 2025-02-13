@@ -36,17 +36,21 @@ The analysis conducted in the paper yielded a series of significant findings reg
 the security of IEEE 802.11 enterprise networks.
 
 
-One of the most relevant aspects emerging from the study concerns the **effective-
-ness of PMF** in mitigating deauthentication and disassociation attacks. In theory,
+One of the most relevant aspects emerging from the study concerns the **effectiveness of PMF** in mitigating deauthentication and disassociation attacks. In theory,
 these security mechanisms should prevent attackers from sending unauthenticated
 management frames to force clients to disconnect from the network. 
 
-However, the tests revealed that, while PMF enhances protection against some attacks, its imple-
-mentation varies significantly across different devices, and in some cases, it is not
+However, the tests revealed that, while PMF enhances protection against some attacks, its implementation varies significantly across different devices, and in some cases, it is not
 sufficient to fully prevent client disconnections. One of the most relevant aspects
 emerging from the study concerns the effectiveness of PMF in mitigating deauthentication and disassociation attacks. In theory, these security mechanisms should
 prevent attackers from sending unauthenticated management frames to force clients
-to disconnect from the network. However, the tests revealed that, while PMF en-
-hances protection against some attacks, its implementation varies significantly across
-different devices, and in some cases, it is not sufficient to fully prevent client discon-
-nections.
+to disconnect from the network. However, the tests revealed that, while PMF enhances protection against some attacks, its implementation varies significantly across
+different devices, and in some cases, it is not sufficient to fully prevent client disconnections.
+
+
+Another interesting aspect revealed by the analysis was the variation in security implementations across different hardware and software vendors. The
+tests showed that while some Windows and Linux devices formally support PMF
+and WPA3, they exhibit significant differences in how they handle attacks. For
+example, some devices ignored unprotected deauthentication frames, while others
+processed them, resulting in a connection loss—even when the protocol should theoretically prevent this. This demonstrates that the protection offered by PMF does
+not solely depend on the protocol itself but also on how manufacturers implement the specifications in their devices.
