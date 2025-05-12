@@ -320,3 +320,13 @@ By ecxecuting the command we performed the ARP poisoning on both the victim ARP 
       vices to intercept traffic.
    - /10.10.10.1//: The IP address of the router.
    - /10.10.10.113//: The IP address of the victim.
+
+From the figure below you can see the attack performed and the modification to the configuration file.
+
+![image](https://github.com/user-attachments/assets/4d6c06c2-fc20-495c-a7c5-53f45eaeb009)
+
+From this other figure we can see the victim ( The Phone) being redirected to the webserver (the PC) despite having searched for ”www.ciao.it”, a fake domain that should have replied with ”No connection” since our VLAN has no internet access.
+
+![dns-attack-resized](https://github.com/user-attachments/assets/93de0817-a00c-4d95-b5cc-73fa2b88bf9f)
+
+
