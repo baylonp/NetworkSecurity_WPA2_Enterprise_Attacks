@@ -1,8 +1,7 @@
 ## What?
 
-In this project, me and my colleagues had fun playing with a WPA2 Enterprise network architecture that we setup in order to apply a real life chain of attack. First **deauth attack**, then **evil twin attac**k and once inside the network, a **DNS spoofing attack**.
+In this project, me and my colleagues had fun playing with a WPA2 Enterprise network architecture that we setup in order to apply a real life chain of attack. First **Deauth attack**, then **Evil twin attack** and once inside the network, a **DNS spoofing attack**.
 
-We took as reference the paper [METTER PAPER] which performed several different attacks on a wider network architecure, closer to an enterprise one.
 
 
 
