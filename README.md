@@ -102,7 +102,11 @@ To conclude, we set PEAP-MSCHAPv2 as the RADIUS server authentication scheme at 
 
 ## Performed Attacks
 
-The attacks that we implemented have been chosen in such a way that they resemble a real chain of attack in a real scenario. First happens **reconnaissance** during which we studied the networks and decided which was the best target. The attacked network’s SSID is **TP-Link 4784**. We started with the **Deauthentication attacks**, so that the we force the connected clients to join our fake network. Then we performed an **Evil Twin Attack**, creating a fake AP in such a way that the client would be tricked into reconnecting to the network. The combination of these two types of attack ensures that the client, after being deauthenticated, can see our rogue AP as the one with the highest signal and thus wanting to connect to it. Finally, to simulate what an attacker can do after having breached into the network, we performed a **DNS spoofing attack** manipulating the ARP tables of the router and of the client, in order to demonstrate how an attacker that gain access to the network can redirect the traffic of clients. In our case, we redirected the traffic to a simple webserver that we spwaned that comprised a HTML webpage saying ”This is a fake web page, part of our DNS spoofing attack”.
+The attacks that we implemented have been chosen in such a way that they resemble a real chain of attack in a real scenario. First happens **reconnaissance** during which we studied the networks and decided which was the best target.
+
+The attacked network’s SSID is **TP-Link 4784**. We started with the **Deauthentication attacks**, so that the we force the connected clients to join our fake network. Then we performed an **Evil Twin Attack**, creating a fake AP in such a way that the client would be tricked into reconnecting to the network. The combination of these two types of attack ensures that the client, after being deauthenticated, can see our rogue AP as the one with the highest signal and thus wanting to connect to it.
+
+Finally, to simulate what an attacker can do after having breached into the network, we performed a **DNS spoofing attack** manipulating the ARP tables of the router and of the client, in order to demonstrate how an attacker that gain access to the network can redirect the traffic of clients. In our case, we redirected the traffic to a simple webserver that we spwaned that comprised a HTML webpage saying ”This is a fake web page, part of our DNS spoofing attack”.
 
 ## Deauthentication
 
@@ -170,7 +174,9 @@ One thing to notice is that as interface we used ”wlan0” which is the one co
 ![image](https://github.com/user-attachments/assets/e8aa2e27-3f9f-47ff-a647-368f4a8c4bb8)
 
 
-The **disconnect user()** function sends deauthentication packets to disconnect a specific device (target mac) from an Access Point (ap mac). First, it checks if the MAC addresses are valid; if not, it prints an error message and terminates. If the parameters are correct, the function creates and sends a deauthentication packet using the Scapy library. The packet consists of three parts: RadioTap() (PHY header for the physical layer), Dot11() (specifies source, destination, and BSSID addresses), and Dot11Deauth(reason=7) (a deauthentication frame with reason code 7). The function uses sendp() to transmit 100 packets at 0.1-second intervals on the specified interface.\\\\
+The **disconnect user()** function sends deauthentication packets to disconnect a specific device (target mac) from an Access Point (ap mac). 
+
+First, it checks if the MAC addresses are valid; if not, it prints an error message and terminates. If the parameters are correct, the function creates and sends a deauthentication packet using the Scapy library. The packet consists of three parts: RadioTap() (PHY header for the physical layer), Dot11() (specifies source, destination, and BSSID addresses), and Dot11Deauth(reason=7) (a deauthentication frame with reason code 7). The function uses sendp() to transmit 100 packets at 0.1-second intervals on the specified interface.
 
 The reason=7 code means that a device has sent a communication frame without being properly connected to the Access Point. Basically the router is saying to the device: ”You are not authorized to send me data because you’re no longer connected!” and disconnects it from the network. This mechanism ensures that
 only authenticated devices can communicate with the AP. To show that the packet effectively deauthenticated the client from the AP we encoded in our script a way to save the captured traffic as a pcap file, so that we could study it via wireshark.
@@ -179,3 +185,17 @@ In thefigure below we can see the deauthentication packet in **wireshark**.
 ![image](https://github.com/user-attachments/assets/b8d3c078-113c-4b43-94ad-85667501e63d)
 
 Since we wanted to try also the **Disassociation attack**, we wrote a script that is almost the same as the deauth one but the difference lies in the packet that the Disassociation function builds, adding a Dot11Disass frame.
+
+## Possible Mitigations
+
+When using a **WPA2-Enterprise** network, mitigating deauthentication attacks requires a combination of security measures that strengthen the network against unauthorized disconnection attempts. One of the most effective defenses is enabling **802.11w**, also known as Protected Management Frames **(PMF)**.
+
+PMF encrypts critical management frames, including deauthentication and disassociation messages, making it nearly impossible for an attacker to forge them. Without PMF, an attacker can easily send fake deauthentication packets to disrupt connections, forcing devices to disconnect and reconnect repeatedly. By enabling PMF, especially in ”Required” mode rather than ”Optional”, you ensure that all devices must support it, preventing attackers from exploiting unprotected clients. Enabling this feature significantly reduces the effectiveness of deauthentication attacks in enterprise environments.
+
+Another essential layer of protection is implementing a Wireless Intrusion Detection and Prevention System **(WIDS/WIPS)**. This system continuously monitors the wireless environment for suspicious activity, such as an unusually high number of deauthentication frames. When a potential attack is detected,
+WIPS can automatically take action, such as blocking the attacking device, alerting administrators, or dynamically adjusting security settings to mitigate the impact.
+
+This proactive monitoring ensures that unauthorized deauthentication attempts are detected and neutralized before they cause significant disruptions.
+Reducing signal strength is another important, yet often overlooked, technique to limit exposure to potential attackers. 
+
+If the Wi-Fi signal extends too far beyond the intended coverage area—such as reaching outside office walls or into public spaces—it becomes easier for an attacker to launch deauthentication attacks from a distance without being physically present inside the building. By adjusting the transmission power of the access points to only cover the necessary areas, it is harder for attackers to interfere with the network while still providing full coverage to legitimate users.
