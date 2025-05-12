@@ -8,17 +8,17 @@ In this project, me and my colleagues had fun playing with a WPA2 Enterprise net
 
 ## Table of Content
 
-- [Introduction]()
-- [Paper Results]()
-- [Overview of the Architecture]()
-- [Let's setup]()
-- [Performed Attacks]()
-  - [Deauthentication]()
-    - [Possible Mitigations]()
-  - [Evil Twin  Attack]()
-    - [Possible Mitigations]()
-  - [DNS Spoofing]()
-    - [Possible Mitigations]()
+- [Introduction](https://github.com/baylonp/WPA2_Enterprise_Attacks/blob/main/README.md#introduction)
+- [Paper Results](https://github.com/baylonp/WPA2_Enterprise_Attacks/blob/main/README.md#paper-results)
+- [Overview of the Architecture](https://github.com/baylonp/WPA2_Enterprise_Attacks/blob/main/README.md#overview-of-the-architecture)
+- [Let's setup](https://github.com/baylonp/WPA2_Enterprise_Attacks/blob/main/README.md#lets-setup)
+- [Performed Attacks](https://github.com/baylonp/WPA2_Enterprise_Attacks/blob/main/README.md#performed-attacks)
+  - [Deauthentication](https://github.com/baylonp/WPA2_Enterprise_Attacks/blob/main/README.md#deauthentication)
+    - [Possible Mitigations](https://github.com/baylonp/WPA2_Enterprise_Attacks/blob/main/README.md#possible-mitigations)
+  - [Evil Twin  Attack](https://github.com/baylonp/WPA2_Enterprise_Attacks/blob/main/README.md#evil-twin-attack)
+    - [Possible Mitigations](https://github.com/baylonp/WPA2_Enterprise_Attacks/blob/main/README.md#possible-mitigations-1)
+  - [DNS Spoofing](https://github.com/baylonp/WPA2_Enterprise_Attacks/blob/main/README.md#dns-spoofing)
+    - [Possible Mitigations](https://github.com/baylonp/WPA2_Enterprise_Attacks/blob/main/README.md#possible-mitiations)
 
 
 
