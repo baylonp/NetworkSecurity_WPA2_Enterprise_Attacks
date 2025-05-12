@@ -329,4 +329,26 @@ From this other figure we can see the victim ( The Phone) being redirected to th
 
 ![dns-attack-resized](https://github.com/user-attachments/assets/93de0817-a00c-4d95-b5cc-73fa2b88bf9f)
 
+## Possible Mitiations
+
+To mitigate this type of attack, it is essential to implement a series of measures that
+strengthen the security of the DNS system and prevent cache poisoning. One of
+the most effective strategies is the adoption of **DNSSEC** (Domain Name System
+Security Extensions), which uses cryptographic signatures to ensure the authenticity
+and integrity of DNS responses. This mechanism ensures that clients receive only
+verified data, preventing the fraudulent modification of DNS responses.
+Limiting the time-to-live (TTL) of DNS responses in the cache helps mitigate the
+impact of potential poisoning, making it more difficult for an attacker to spread
+malicious information over time.
+
+The use of encrypted connections, such as those provided by DNS over HTTPS
+(**DoH**) and DNS over TLS (**DoT**), also contributes to improving DNS security
+by protecting requests and responses from interception and manipulation. These
+technologies prevent attackers from observing or altering DNS queries in transit.
+More over, the implementation of anomaly detection systems can help identify sud-
+den changes in DNS records, allowing rapid intervention before an attack spreads.
+Finally, user education plays a big role in preventing DNS spoofing. Training em-
+ployees and end users on always checking the HTTPS certificates for visited sites and
+paying attention to signs of potential attacks, such as sudden redirects or browser
+error messages, can reduce the impact.
 
