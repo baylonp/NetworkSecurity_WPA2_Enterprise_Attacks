@@ -311,11 +311,11 @@ $ sudo ettercap -T -q -i wlan0 -P dns_spoof -M ARP /10.10.10.1// /10.10.10.113//
 
 By ecxecuting the command we performed the ARP poisoning on both the victim ARP tables and Router ARP tables. Now, when the router wants to connect to the victim the traffic goes through us, and viceversa when the victim wants to talk with the router. Since we have the traffic going through us, we redirect the DNS request to our **python webserver** (10.10.10.109).
 
-   -T: Specifies the text-only mode, avoiding the graphical interface.
-   -q: Enables quiet mode, reducing the amount of displayed output.
-   -i wlan0: Defines the network interface to use, wlan0.
-   -P dns spoof : Enables the DNS spoofing plugin, which manipulates DNS
+   - T: Specifies the text-only mode, avoiding the graphical interface.
+   - q: Enables quiet mode, reducing the amount of displayed output.
+   - i wlan0: Defines the network interface to use, wlan0.
+   - P dns spoof : Enables the DNS spoofing plugin, which manipulates DNS
       responses to redirect traffic.
-   -M ARP: Sets the ARP poisoning attack mode, which deceives network de-
-  vices to intercept traffic.
+   - M ARP: Sets the ARP poisoning attack mode, which deceives network de-
+      vices to intercept traffic.
 
