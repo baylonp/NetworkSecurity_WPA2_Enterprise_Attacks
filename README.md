@@ -70,8 +70,8 @@ The list of what was needed in our environment to make it work comprises:
 We run Freeradius on a VM in a Proxmox server. The server had an assigned NIC that connected it directly to the router. We also
 tried deploying an AD Domain Controller on a Windows Server for storing users credentials, the connection between Freeradius and the DC worked flawlessly but the
 user authentication could not work and we decided to drop this approach relying only on the Freeradius server and users specified in its configuration file. The architecture
-can be seen in figure. 
-![image](https://github.com/user-attachments/assets/ad59f992-c61f-42d8-b3bd-65384bd3fce6)
+can be seen in the figure below. 
+![image](https://github.com/user-attachments/assets/c6e91a47-6382-4f62-bf95-a6988d8adae1)
 
 
 ## Let's setup
