@@ -318,4 +318,5 @@ By ecxecuting the command we performed the ARP poisoning on both the victim ARP 
       responses to redirect traffic.
    - M ARP: Sets the ARP poisoning attack mode, which deceives network de-
       vices to intercept traffic.
-
+   - /10.10.10.1//: The IP address of the router.
+   - /10.10.10.113//: The IP address of the victim.
