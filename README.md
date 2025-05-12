@@ -225,8 +225,13 @@ radius_server_auth_port=1812
 radius_server_secret=testing123
 ```
 
-As we can see from the figures below the AP TP-Link Fake was created successfully. Since the network that we want to attack is a WPA2 Enterprise one, we needed to setup a **fake freeradius server** to connect to the fake AP. 
+As we can see from the figures below the AP TP-Link Fake was created successfully. 
+![image](https://github.com/user-attachments/assets/69aaac8e-4ca0-4ee1-b8b0-4da7d17859d3)
 
+![image](https://github.com/user-attachments/assets/6bd7084f-6e3b-474d-b7e6-f676490754cf)
+
+
+Since the network that we want to attack is a WPA2 Enterprise one, we needed to setup a **fake freeradius server** to connect to the fake AP. 
 We installed the** freeradius-wpe (wireless pownage edition)** from the Kali Linux repo.
 (https://www.kali.org/tools/freeradius-wpe/).
 
