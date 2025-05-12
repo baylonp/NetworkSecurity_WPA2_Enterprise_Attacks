@@ -225,7 +225,8 @@ radius_server_auth_port=1812
 radius_server_secret=testing123
 ```
 
-As we can see from the figures below the AP TP-Link Fake was created successfully. 
+As we can see from the figures below the AP TP-Link Fake was created successfully.
+
 <img src="https://github.com/user-attachments/assets/69aaac8e-4ca0-4ee1-b8b0-4da7d17859d3" width="360" height="800">
 <img src="https://github.com/user-attachments/assets/6bd7084f-6e3b-474d-b7e6-f676490754cf" width="360" height="800">
 
