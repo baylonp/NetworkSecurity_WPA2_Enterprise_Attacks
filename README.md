@@ -166,3 +166,16 @@ def scan_for_clients(ap_mac, interface):
     sniff(iface=interface, prn=packet_handler, timeout=15, store=False)
     return list(clients_info.values())
 ```
+One thing to notice is that as interface we used ”wlan0” which is the one coming out of the **ALFA AWUS036ACH adapte**r as shown in figure below.
+![image](https://github.com/user-attachments/assets/e8aa2e27-3f9f-47ff-a647-368f4a8c4bb8)
+
+
+The **disconnect user()** function sends deauthentication packets to disconnect a specific device (target mac) from an Access Point (ap mac). First, it checks if the MAC addresses are valid; if not, it prints an error message and terminates. If the parameters are correct, the function creates and sends a deauthentication packet using the Scapy library. The packet consists of three parts: RadioTap() (PHY header for the physical layer), Dot11() (specifies source, destination, and BSSID addresses), and Dot11Deauth(reason=7) (a deauthentication frame with reason code 7). The function uses sendp() to transmit 100 packets at 0.1-second intervals on the specified interface.\\\\
+
+The reason=7 code means that a device has sent a communication frame without being properly connected to the Access Point. Basically the router is saying to the device: ”You are not authorized to send me data because you’re no longer connected!” and disconnects it from the network. This mechanism ensures that
+only authenticated devices can communicate with the AP. To show that the packet effectively deauthenticated the client from the AP we encoded in our script a way to save the captured traffic as a pcap file, so that we could study it via wireshark.
+
+In thefigure below we can see the deauthentication packet in **wireshark**.
+![image](https://github.com/user-attachments/assets/b8d3c078-113c-4b43-94ad-85667501e63d)
+
+Since we wanted to try also the **Disassociation attack**, we wrote a script that is almost the same as the deauth one but the difference lies in the packet that the Disassociation function builds, adding a Dot11Disass frame.
