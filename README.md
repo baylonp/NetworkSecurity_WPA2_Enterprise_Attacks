@@ -13,10 +13,13 @@ We took as reference the paper [METTER PAPER] which performed several different 
 - [Paper Results]()
 - [Overview of the Architecture]()
 - [Let's setup]()
-- []()
-- 
-
-
+- [Performed Attacks]()
+  - [Deauthentication]()
+    - [Possible Mitigations]()
+  - [Evil Twin  Attack]()
+    - [Possible Mitigations]()
+  - [DNS Spoofing]()
+    - [Possible Mitigations]()
 
 
 
@@ -97,5 +100,37 @@ The second to last step is to generate the RADIUS server certificate, since the 
 
 To conclude, we set PEAP-MSCHAPv2 as the RADIUS server authentication scheme at **/etc/freeradius/3.0/mods-enabled/eap** inside the peap section.
 
+## Performed Attacks
+
+The attacks that we implemented have been chosen in such a way that they resemble a real chain of attack in a real scenario. First happens **reconnaissance** during which we studied the networks and decided which was the best target. The attacked network’s SSID is **TP-Link 4784**. We started with the **Deauthentication attacks**, so that the we force the connected clients to join our fake network. Then we performed an **Evil Twin Attack**, creating a fake AP in such a way that the client would be tricked into reconnecting to the network. The combination of these two types of attack ensures that the client, after being deauthenticated, can see our rogue AP as the one with the highest signal and thus wanting to connect to it. Finally, to simulate what an attacker can do after having breached into the network, we performed a **DNS spoofing attack** manipulating the ARP tables of the router and of the client, in order to demonstrate how an attacker that gain access to the network can redirect the traffic of clients. In our case, we redirected the traffic to a simple webserver that we spwaned that comprised a HTML webpage saying ”This is a fake web page, part of our DNS spoofing attack”.
+
+## Deauthentication
+
+For this attack, since we wanted to deeply understand the reality of what was happening under the hood, we decided to **ditch the Kali Linux Tool aireplay-ng** and choose to implement our own Python Code using the Scapy Library.
+
+The functions that make the attack works are:
+  • scan for ap(ssid, interface)
+  • scan for clients(ap mac, interface)
+  • disconnect user(target mac, ap mac, interface)
+
+```python
+def scan_for_ap(ssid, interface):
+    print(f"Scanning for AP with SSID: {ssid}...")
+    found = []  # List to save the found MAC address
+
+    def packet_handler(pkt):
+        if pkt.haslayer(Dot11Beacon) and pkt.info.decode() == ssid:
+            print(f"Found AP: {ssid}, MAC: {pkt.addr2}")
+            found.append(pkt.addr2)
+            return True
+
+    def stop_filter(pkt):
+        return len(found) > 0
+
+    sniff(iface=interface, prn=packet_handler, timeout=10,
+          store=False, stop_filter=stop_filter)
+
+    return found[0] if found else None
+```
 
 
