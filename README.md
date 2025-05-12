@@ -226,10 +226,10 @@ radius_server_secret=testing123
 ```
 
 As we can see from the figures below the AP TP-Link Fake was created successfully. 
-![image](https://github.com/user-attachments/assets/69aaac8e-4ca0-4ee1-b8b0-4da7d17859d3)
 <img src="https://github.com/user-attachments/assets/69aaac8e-4ca0-4ee1-b8b0-4da7d17859d3" width="360" height="800">
+<img src="https://github.com/user-attachments/assets/6bd7084f-6e3b-474d-b7e6-f676490754cf" width="360" height="800">
 
-![image](https://github.com/user-attachments/assets/6bd7084f-6e3b-474d-b7e6-f676490754cf)
+
 
 
 Since the network that we want to attack is a WPA2 Enterprise one, we needed to setup a **fake freeradius server** to connect to the fake AP. 
