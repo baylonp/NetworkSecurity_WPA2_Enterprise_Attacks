@@ -246,3 +246,40 @@ we had the view of what was happening during the connection of clients and the a
 
 ![image](https://github.com/user-attachments/assets/da22216c-64c0-4489-945f-8324cc2f8e21)
 
+
+Now, after having captured the challenge-response, it is time to crack it using **Jhon The Ripper** ( tool already present in Kali Linux). Since we already knew the password was ”hello” we used the RockYou.txt file to crack it. 
+
+![image](https://github.com/user-attachments/assets/7f2691ce-789c-44b9-afef-51dfbe5ea392)
+
+Notice that the **challenge-capture.txt** file format was **”bob::NETNTLM$challenge $response”**
+
+## Possible Mitigations
+To mitigate the risk, several secure authentication mechanisms can be employed, including EAP-TTLS with PAP and EAP-GTC.
+
+**EAP-TTLS** (Extensible Authentication Protocol - Tunneled Transport Layer Security) with PAP (Password Authentication Protocol) is a strong mitigation strategy. PAP transmits passwords in plaintext within a secure TLS tunnel. The overall security relies on the robustness of TLS, which uses AES-256 encryption and RSA/ECDSA certificates to ensure confidentiality.
+
+**EAP-GTC** transmits passwords within an encrypted TLS tunnel. It offers greater security than MSCHAPv2 by avoiding challenge-response mechanisms, which can be susceptible to offline cracking attacks.
+While well-supported in Linux environments, compatibility issues arise with Windows and Android.
+
+As reported in the Book: **”The Ultimate Kali Linux Book: Perform Advanced Penetration”** organizations should follow these guidelines to minimize
+the risks associated with wireless network attacks:
+  
+  - Deploy a Wireless Intrusion Prevention System (WIPS) on all corporate wireless
+  networks.
+  
+  - Regularly update firmware and install patches on all wired and wireless devices.
+    
+  - Ensure compliance with the National Institute of Standards and Technology
+  **(NIST) SP 800-97** framework for robust wireless security. NIST SP 800-97.
+  
+  - Whenever feasible, implement multi-factor authentication (MFA) for network ac-
+  cess.
+  
+  - Utilize certificate-based authentication to enhance the confidentiality and integrity
+  of wireless communications.
+  
+  - Implement Authentication, Authorization, and Accounting (AAA) protocols such
+  as RADIUS to manage user access and security effectively.
+  
+  - Establish segmented and isolated guest wireless networks to limit access and ex-
+  posure.
