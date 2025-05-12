@@ -281,5 +281,13 @@ the risks associated with wireless network attacks:
   - Implement Authentication, Authorization, and Accounting (AAA) protocols such
   as RADIUS to manage user access and security effectively.
   
-  - Establish segmented and isolated guest wireless networks to limit access and ex-
-  posure.
+  - Establish segmented and isolated guest wireless networks to limit access and exposure.
+
+## DNS Spoofing
+
+For this final attack, now that the attacker has the credentials of the network, we
+performed a DNS Spoof, in which a DNS request gets replied with a fake website
+domain.
+To makes things easy, we run a webserver with python ”python3 -m http.server
+80” that showed a simple index.html file showing ”Welcome to the Fake Page,
+this page is for DNS spoofing”. We run this on a different pc connected to the
