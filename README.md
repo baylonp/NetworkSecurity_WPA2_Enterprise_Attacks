@@ -173,7 +173,7 @@ def scan_for_clients(ap_mac, interface):
 One thing to notice is that as interface we used ”wlan0” which is the one coming out of the **ALFA AWUS036ACH adapte**r as shown in figure below.
 ![image](https://github.com/user-attachments/assets/e8aa2e27-3f9f-47ff-a647-368f4a8c4bb8)
 
-<img src="[https://github.com/user-attachments/a...](https://github.com/user-attachments/assets/e8aa2e27-3f9f-47ff-a647-368f4a8c4bb8)" width="500" height="300">
+<img src="https://github.com/user-attachments/assets/e8aa2e27-3f9f-47ff-a647-368f4a8c4bb8" width="500" height="300">
 
 The **disconnect user()** function sends deauthentication packets to disconnect a specific device (target mac) from an Access Point (ap mac). 
 
