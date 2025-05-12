@@ -241,3 +241,8 @@ From running freeradius-wpe in debug mode
 ```bash
 $ freeradius-wpe -X
 ```
+
+we had the view of what was happening during the connection of clients and the authentication phase. After havig connected the client infact, in the shell where we run freeradius-wpe we could see the challenge sent from our Kali Box to the client and the response of the client that comprised the credential of that user. As shown below
+
+![image](https://github.com/user-attachments/assets/da22216c-64c0-4489-945f-8324cc2f8e21)
+
